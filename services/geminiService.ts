@@ -1,14 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 import type { Category } from '../types';
 
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 const createSystemInstruction = (category: Category | null) => {
-  const baseInstruction = `You are a world-class prompt engineer, acting with the capabilities of Gemini 2.5 Pro. Your task is to take a user's raw idea or keywords and transform it into a highly detailed, clear, and effective prompt for a generative AI.
+  const baseInstruction = `You are a world-class prompt engineer, acting with the capabilities of Gemini 2.5 Flash. Your task is to take a user's raw idea or keywords and transform it into a highly detailed, clear, and effective prompt for a generative AI.
 
 Your goal is to "enhance" the user's text, not replace it. Build upon their original idea by:
 - Adding rich, descriptive details and sensory language.
@@ -30,11 +24,16 @@ Generate ONLY the enhanced prompt. Do not include any conversational filler, int
 
 
 export const enhancePrompt = async (category: Category | null, keywords: string): Promise<string> => {
+  if (!process.env.API_KEY) {
+    return "An error occurred: The API_KEY environment variable is not set. Please configure it in your deployment settings.";
+  }
+
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const systemInstruction = createSystemInstruction(category);
     
     const response = await ai.models.generateContent({
-      model: 'gemini-flash-latest',
+      model: 'gemini-2.5-flash',
       contents: `User Keywords: "${keywords}"`,
       config: {
         systemInstruction: systemInstruction,
