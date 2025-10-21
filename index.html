@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Prompt Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Prevents FOUC (Flash of Unstyled Content) for dark mode
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+    <style>
+      /* For custom scrollbar aesthetics */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      /* Light theme scrollbar */
+      ::-webkit-scrollbar-track {
+        background: #e0e0e0;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #0B6247;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #D7B877;
+      }
+
+      /* Dark theme scrollbar */
+      html.dark ::-webkit-scrollbar-track {
+        background: #2A2F27;
+      }
+      html.dark ::-webkit-scrollbar-thumb {
+        background: #0B6247;
+      }
+      html.dark ::-webkit-scrollbar-thumb:hover {
+        background: #D7B877;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.25.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-[#F0F2F5] text-[#2A2F27] dark:bg-[#1A1D1A] dark:text-[#F5EFE7] transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
